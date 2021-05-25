@@ -12,4 +12,41 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap
  */
+.admin-wrapper{
+  padding-left: 92px !important;
+  padding-top: 60px;
+}
+.admin-nav-bar{
+  padding-top: 40px !important;
+  border-right: 2px solid lightgray;
+  width: 80px;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  padding-top: 56px !important;
+}
+.menu-item{
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg{
+    color: lightgray;
+  }
+  &:hover{
+    svg{
+      color: red
+    }
+  }
+}
+.admin-side{
+  .navbar{
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+  }
+}
