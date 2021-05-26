@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root "pages#home"
+  root to: "pages#home"
   namespace :account do
     namespace :admin do
-      resources  :users, only: [:index, :show]
+      resources  :users, only: [:index, :show, :edit, :update, :destroy]
     end
   end
 

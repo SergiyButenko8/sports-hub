@@ -3,6 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum status: [ :active, :blocked ]
-  enum role: [ :user, :admin ]
+  enum status: {active: 0, blocked: 1 }
+  enum role: { user: 0, admin: 1 }
 end

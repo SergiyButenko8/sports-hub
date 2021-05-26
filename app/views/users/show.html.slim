@@ -1,10 +1,19 @@
 .row
   .col-12
-      p = @user.first_name
-      p = @user.last_name
-      - @avatar = @user.avatar.nil? ? "---" : @user.avatar
-      p = @avatar
-      p = @user.password
-      p = @user.status
-      p = @user.role
-      = link_to "All users", account_admin_users_path, class: "btn btn-warning"
+    h2 =@user.email
+    ul
+      li
+        | First Name:
+        = @user.first_name
+      li
+        | Last Name:
+        = @user.last_name
+      li
+        | Email:
+        = @user.email
+      li
+        | Status:
+        = @user.status
+      li
+        | Role:
+        = @user.role
