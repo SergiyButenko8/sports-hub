@@ -1,0 +1,30 @@
+.row
+  .col-12
+    .info-wrapper
+      nav
+        .nav.nav-tabs id="nav-tab" role="tab-list"
+          button.nav-link.active id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true" General
+          button.nav-link id="teams-tab" data-bs-toggle="tab" data-bs-target="#teams" type="button" role="tab" aria-controls="teams" aria-selected="false" Teams
+
+      .tab-content id="nav-tabContent"
+        .tab-pane.fade.show.active id="general" role="tabpanel" aria-labelledby="general-tab"
+          .card
+            = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 120px; height: 120px", class: "rounded-circle"
+            - name = @user.first_name + ' ' + @user.last_name unless @user.first_name.nil? || @user.last_name.nil?
+            .name.mb-4 = name
+            - register_date = @user.created_at.to_date.strftime("%d/%m/%Y")
+            .d-flex.info.justify-content-between.mb-3 style="width: 100%"
+              .lable-info
+                | Registered
+              .float-right = register_date
+            .d-flex.info.justify-content-between.mb-3 style="width: 100%"
+              .lable-info
+                | Passed Surveys
+              .float-right = 42
+            .d-flex.info.justify-content-between.mb-3 style="width: 100%"
+              .lable-info
+                | Teams
+              .float-right = 14
+
+
+        .tab-pane.fade id="teams" role="tabpanel" aria-labelledby="teams-tab" Teams

@@ -30,6 +30,7 @@ gem "slim-rails"
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'html2slim', '~> 0.2.0'
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

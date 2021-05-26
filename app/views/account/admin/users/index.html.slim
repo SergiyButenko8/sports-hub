@@ -1,0 +1,88 @@
+.row
+  .col-4
+    h5
+      | Admins
+      | (
+      = @admins.count
+      | )
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Status
+          th colspan="4" Action
+      tbody
+        - @admins.each do |admin|
+          tr
+            - name = admin.first_name + ' ' + admin.last_name unless admin.first_name.nil? || admin.last_name.nil?
+            - if name.nil?
+              td
+                = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 30px; height: 30px", class: "rounded-circle mx-1"
+                | ---
+            - else
+              td
+                = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 30px; height: 30px", class: "rounded-circle mx-1"
+                =name
+            - if admin.active?
+              td.text-success.text-capitalize = admin.status
+            - if !admin.active?
+              td.text-dark.text-capitalize = admin.status
+            td
+              .dropdown
+                button.btn.btn-secondary.dropdown-toggle type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" Actions
+                ul.dropdown-menu aria-labelledby="dropdownMenuButton1"
+                  li.dropdown-item
+                    = link_to  "Remove from Admin", remove_from_admin_account_admin_user_path(admin), method: :put
+                  li.dropdown-item
+                    = link_to "Delete", account_admin_user_path(admin), method: :delete,  data: {confirm: "Are you sure?" }
+            td = link_to "Show", account_admin_user_path(admin), class: "btn btn-sm btn-outline-success"
+            td = link_to "Edit", edit_account_admin_user_path(admin), class: "btn btn-sm btn-outline-warning"
+            td = link_to "Delete", account_admin_user_path(admin), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+
+  .col-4
+    h5
+      | Users
+      | (
+      = @users.count
+      | )
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Status
+          th colspan="4" Action
+      tbody
+        - @users.each do |user|
+          tr
+            - name = user.first_name + ' ' + user.last_name unless user.first_name.nil? || user.last_name.nil?
+            - if name.nil?
+              td
+                = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 30px; height: 30px", class: "rounded-circle mx-1"
+                | ---
+            - else
+              td
+                = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 30px; height: 30px", class: "rounded-circle mx-1"
+                =name
+            - if user.active?
+              td.text-success.text-capitalize = user.status
+            - if !user.active?
+              td.text-dark.text-capitalize= user.status
+            td
+              .dropdown
+                button.btn.btn-secondary.dropdown-toggle type="button" id="d" data-bs-toggle="dropdown" aria-expanded="false" Actions
+                ul.dropdown-menu aria-labelledby="dropdownMenuButton1"
+
+                  -if user.active?
+                    li.dropdown-item
+                      = link_to  "Block", block_user_account_admin_user_path(user), method: :put
+                    li.dropdown-item
+                      = link_to  "Make as admin", add_to_admin_account_admin_user_path(user), method: :put
+                  -elsif user.blocked?
+                    li.dropdown-item
+                      = link_to "Activate", activate_user_account_admin_user_path(user), method: :put
+                  li.dropdown-item
+                    = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }
+            td = link_to "Show", account_admin_user_path(user), class: "btn btn-sm btn-outline-success"
+            td = link_to "Edit", edit_account_admin_user_path(user), class: "btn btn-sm btn-outline-warning"
+            td = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+
