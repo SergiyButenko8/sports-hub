@@ -1,7 +1,6 @@
 module Account::Admin
   class UsersController < AdminBaseController
     before_action :set_user, only: [:show, :edit, :update, :destroy, :change_user_status, :change_admin_permission, :full_name]
-    layout "admin_layout"
     def index
       @users = User.where(role: 'user')
       @admins = User.where(role: 'admin')
@@ -18,6 +17,7 @@ module Account::Admin
         flash[:notice] = "User has been successfully updated"
         redirect_to account_admin_users_path
       else
+        flash[:error] = "Error.."
         render "account/admin/users/edit"
       end
     end
@@ -27,6 +27,7 @@ module Account::Admin
       if @user.update(role: user_role)
         redirect_to account_admin_users_path, notice: "User #{@user.email} is an #{user_role} now"
       else
+        flash[:error] = "Error.."
         render 'account/admin/users/index'
       end
     end
@@ -36,6 +37,7 @@ module Account::Admin
       if @user.update(status: user_status)
         redirect_to account_admin_users_path, notice: "User #{@user.email} is #{user_status} now"
       else
+        flash[:error] = "Error.."
         render 'account/admin/users/index'
       end
     end
@@ -44,8 +46,12 @@ module Account::Admin
       if the_same_user?
         flash[:notice] = "You cannot remove your own account"
       else
-        @user.destroy
-        flash[:notice] = "Account has been removed"
+        if @user.destroy
+          flash[:notice] = "Account has been removed"
+        else
+          flash[:error] = "Error.."
+          render 'account/admin/users/index'
+        end
       end
       redirect_to account_admin_users_path
     end

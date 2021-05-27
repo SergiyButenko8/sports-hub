@@ -10,8 +10,7 @@
         .tab-pane.fade.show.active id="general" role="tabpanel" aria-labelledby="general-tab"
           .card
             = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 120px; height: 120px", class: "rounded-circle"
-            - name = @user.first_name + ' ' + @user.last_name unless @user.first_name.nil? || @user.last_name.nil?
-            .name.mb-4 = name
+            .name.mb-4 = @user.full_name
             - register_date = @user.created_at.to_date.strftime("%d/%m/%Y")
             .d-flex.info.justify-content-between.mb-3 style="width: 100%"
               .lable-info
