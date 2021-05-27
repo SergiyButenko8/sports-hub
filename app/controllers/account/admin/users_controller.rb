@@ -1,58 +1,52 @@
 module Account::Admin
   class UsersController < AdminBaseController
-    before_action :set_user, only: [:show, :edit, :update, :destroy, :remove_from_admin, :add_to_admin, :activate_user, :block_user]
+    before_action :set_user, only: [:show, :edit, :update, :destroy, :change_user_status, :change_admin_permission, :full_name]
     layout "admin_layout"
     def index
       @users = User.where(role: 'user')
       @admins = User.where(role: 'admin')
-      #render "users/index"
     end
+
     def show
-      #render "users/show"
     end
+
     def edit
-      #render "users/edit"
     end
 
     def update
       if @user.update(user_params)
+        flash[:notice] = "User has been successfully updated"
         redirect_to account_admin_users_path
       else
-        #render "users/edit"
+        render "account/admin/users/edit"
       end
     end
 
-    def add_to_admin
-      @user.role = "admin"
-      if @user.save
-        redirect_to account_admin_users_path
+    def change_admin_permission
+      user_role = @user.user? ? "admin" : "user"
+      if @user.update(role: user_role)
+        redirect_to account_admin_users_path, notice: "User #{@user.email} is an #{user_role} now"
+      else
+        render 'account/admin/users/index'
       end
     end
 
-    def remove_from_admin
-      @user.role = "user"
-      if @user.save
-        redirect_to account_admin_users_path
-      end
-    end
-
-    def block_user
-      @user.blocked!
-      if @user.save
-        redirect_to account_admin_users_path
-      end
-    end
-
-    def activate_user
-      @user.active!
-      if @user.save
-        redirect_to account_admin_users_path
+    def change_user_status
+      user_status = @user.active? ? "blocked" : "active"
+      if @user.update(status: user_status)
+        redirect_to account_admin_users_path, notice: "User #{@user.email} is #{user_status} now"
+      else
+        render 'account/admin/users/index'
       end
     end
 
     def destroy
-      @user.destroy
-      flash[:notice] = "Account has been removed"
+      if the_same_user?
+        flash[:notice] = "You cannot remove your own account"
+      else
+        @user.destroy
+        flash[:notice] = "Account has been removed"
+      end
       redirect_to account_admin_users_path
     end
 
@@ -63,6 +57,10 @@ module Account::Admin
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def the_same_user?
+      @user == current_user
     end
   end
 end
