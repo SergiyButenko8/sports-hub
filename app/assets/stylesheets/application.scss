@@ -17,6 +17,30 @@
 .admin-wrapper{
   padding-left: 92px !important;
   padding-top: 60px;
+  .info-wrapper{
+    width: 300px;
+    #nav-tab{
+      .nav-link{
+        width: 50%;
+        color: #000;
+      }
+      .active{
+        color: red;
+      }
+    }
+    .card{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px;
+      font-weight: 500;
+      .info{
+        .lable-info{
+          color: #666666;
+        }
+      }
+    }
+  }
 }
 .admin-nav-bar{
   padding-top: 40px !important;

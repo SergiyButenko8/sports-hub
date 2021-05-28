@@ -1,0 +1,18 @@
+= form_for @user, :url => account_admin_user_path(@user) do |f|
+
+  = f.label :first_name
+  = f.text_field :first_name, class: "form-control mb-2"
+
+  = f.label :last_name
+  = f.text_field :last_name, class: "form-control mb-2"
+
+  = f.label :email
+  = f.text_field :email, class: "form-control mb-2"
+
+  = f.label :status
+  = f.text_field :status, class: "form-control mb-2"
+
+  = f.label :role
+  = f.text_field :role, class: "form-control mb-2"
+
+  = f.submit class: "btn btn-success"
