@@ -42,6 +42,8 @@ Metrics/BlockLength:
   Exclude:
     - 'config/routes.rb'
     - 'config/environments/*'
+    - 'spec/**/*.rb'
+  IgnoredMethods: ['describe', 'context']
 Layout/LineLength:
   Max: 120
 Style/StringLiterals:

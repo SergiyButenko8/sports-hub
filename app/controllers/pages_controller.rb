@@ -2,5 +2,7 @@
 
 # Default pages controller
 class PagesController < ApplicationController
-  def home; end
+  def home
+    render 'pages/home'
+  end
 end
