@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Account::Admin
   class AdminBaseController < Account::AccountBaseController
     layout "admin_layout"

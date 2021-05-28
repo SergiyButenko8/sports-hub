@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Account::Admin
   class UsersController < AdminBaseController
     before_action :set_user, only: [:show, :edit, :update, :destroy, :change_user_status, :change_admin_permission, :full_name]
