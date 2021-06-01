@@ -1,0 +1,17 @@
+DOCTYPE html
+html
+  head
+    title SportsHub
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_pack_tag 'application', 'data-turbolinks-track': true
+
+
+  body
+    = render "shared/admin_nav"
+    .container-fluid.admin-wrapper
+      = render "layouts/messages"
+      = yield

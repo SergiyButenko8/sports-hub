@@ -21,18 +21,18 @@ table.table.table-striped
             ul.dropdown-menu aria-labelledby="dropdownMenuButton1"
               - if user.admin?
                 li.dropdown-item
-                  = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user), method: :put
+                  = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user, user: {role: "user"}), method: :put
                 li.dropdown-item
                   = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure?" }
               - else
                 - if user.active?
                   li.dropdown-item
-                    = link_to "Block", change_user_status_account_admin_user_path(user), method: :put
+                    = link_to "Block", change_user_status_account_admin_user_path(user, user: {status: "blocked"}), method: :put
                   li.dropdown-item
-                    = link_to "Make as admin", change_admin_permission_account_admin_user_path(user), method: :put
+                    = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put
                 - else
                   li.dropdown-item
-                    = link_to "Activate", change_user_status_account_admin_user_path(user), method: :put
+                    = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put
                 li.dropdown-item
                   = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }
         td = link_to "Show", account_admin_user_path(user), class: "btn btn-sm btn-outline-success"

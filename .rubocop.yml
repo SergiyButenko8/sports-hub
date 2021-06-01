@@ -1,0 +1,54 @@
+require:
+- rubocop-rails
+- rubocop-rspec
+Style/Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'config/initializers/*'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+  NewCops: enable
+  TargetRubyVersion: 2.7.1
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  EnforcedStyle: always
+Rails/FilePath:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Max: 9
+RSpec/ExampleLength:
+  Max: 18
+RSpec/FilePath:
+  Enabled: false
+RSpec/NamedSubject:
+  Exclude:
+    - 'spec/**/*'
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
+Lint/ImplicitStringConcatenation:
+  Exclude:
+Style/BlockComments:
+  Description: 'Do not use block comments.'
+  StyleGuide: '#no-block-comments'
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/environments/*'
+    - 'spec/**/*.rb'
+  IgnoredMethods: ['describe', 'context']
+Layout/LineLength:
+  Max: 120
+Style/StringLiterals:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
