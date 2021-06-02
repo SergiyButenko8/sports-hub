@@ -24,6 +24,36 @@ RSpec.describe 'admin users management', type: :request do
     end
   end
 
+  describe '#show' do
+    let(:user) { create(:user) }
+
+    it 'returns http success if admin' do\
+      get account_admin_user_path(current_admin)
+      expect(response).to be_successful
+    end
+
+    it 'redirect to login page' do
+      sign_in user
+      get account_admin_user_path(user)
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  describe '#edit' do
+    let(:user) { create(:user) }
+
+    it 'returns http success if admin' do\
+      get edit_account_admin_user_path(current_admin)
+      expect(response).to be_successful
+    end
+
+    it 'redirect to login page' do
+      sign_in user
+      get edit_account_admin_user_path(user)
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
   describe '#update' do
     context "when user params are valid" do
       it "updates" do
@@ -131,6 +161,7 @@ RSpec.describe 'admin users management', type: :request do
         expect do
           delete account_admin_user_path(current_admin)
         end.not_to change(User, :count)
+        expect(response).to have_http_status(:redirect)
       end
     end
   end

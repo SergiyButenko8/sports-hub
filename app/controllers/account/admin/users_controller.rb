@@ -5,6 +5,7 @@ module Account::Admin
     before_action :set_user,
                   only: %i[show edit update destroy change_user_status change_admin_permission]
     before_action :not_current_user, only: %i[destroy change_admin_permission]
+    before_action :authorize_admin_user
     def index
       @users = User.where(role: 'user')
       @admins = User.where(role: 'admin')
@@ -66,6 +67,10 @@ module Account::Admin
         flash[:alert] = "This action is not allowed for your own account"
         redirect_to account_admin_users_path
       end
+    end
+
+    def authorize_admin_user
+      authorize current_user
     end
   end
 end
