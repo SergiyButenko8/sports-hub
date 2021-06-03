@@ -16,7 +16,7 @@
  */
 .admin-wrapper{
   padding-left: 92px !important;
-  padding-top: 60px;
+  padding-top: 120px;
   .info-wrapper{
     width: 300px;
     #nav-tab{
@@ -37,6 +37,71 @@
       .info{
         .lable-info{
           color: #666666;
+        }
+      }
+    }
+  }
+  .admin-tabs-table{
+    .nav-tabs{
+      border-bottom: none;
+    }
+    .search{
+      justify-content: flex-end;
+      .input-group{
+        border: 1px solid lightgrey;
+        border-radius: 6px;
+        button, input{
+          border: none;
+        }
+      }
+    }
+    .table{
+      vertical-align: middle;
+      thead{
+        background-color: #f2f2f2;
+        height: 30px;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #515b6c;
+        th:first-child{
+          width: 50%;
+          padding-left: 20px;
+        }
+        th:nth-child(2),
+        th:nth-child(3) {
+          width: 25%;
+          text-align: center;
+        }
+      }
+      tbody{
+        font-size: 14px;
+        font-weight: 500;
+        td:first-child{
+          padding-left: 20px;
+        }
+        td:nth-child(2),
+        td:nth-child(3) {
+          text-align: center;
+        }
+      }
+    }
+
+    #nav-tab{
+      .nav-link{
+        width: 85px;
+        color: #000;
+        padding: 8px 0px;
+        margin: 0;
+        border: none;
+        span{
+          font-size: 14px;
+          font-width: 500;
+        }
+      }
+      .active{
+        color: red;
+        .underline{
+          border-bottom: 2px solid red;
         }
       }
     }
@@ -78,8 +143,8 @@
   display: flex;
   align-items: center;
   .img-mask {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     padding: 2px;
     align-self: flex-start;
     margin-right: 5px;
@@ -90,11 +155,11 @@
       border-radius: 50%;
       position: relative;
       border: 2px solid #fff;
-      left: 26px;
-      bottom: 13px;
+      left: 30px;
+      bottom: 15px;
     }
     .online{
-      background-color: green;
+      background-color: #68af0f;
     }
     .offline{
       background-color: #666666;
@@ -103,4 +168,17 @@
   .name-info{
     align-self: flex-end;
   }
+}
+
+button,
+input,
+textarea,
+select,
+.page-link,
+.badge,
+.btn{
+  box-shadow: none !important;
+}
+select:focus{
+  box-shadow: none !important;
 }

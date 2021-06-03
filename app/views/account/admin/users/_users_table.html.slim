@@ -1,29 +1,28 @@
-h5 = "#{title} (#{obj.count})"
-table.table.table-striped
+table.table
   thead
     tr
       th Name
       th Status
-      th colspan="4" Action
+      th Action
   tbody
     - obj.each do |user|
       tr
         td
           .info-user-table
             .img-mask
-              = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 38px; height: 38px", class: "rounded-circle"
+              = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 44px; height: 44px", class: "rounded-circle"
               - if user.online?
                 span.activity.online
               - else
                 span.activity.offline
             span = user.full_name
         -if user.active?
-          td.text-success.text-capitalize = user.status
+          td.text-capitalize style="color: #75cb73" = user.status
         -else
           td.text-dark.text-capitalize = user.status
         td
           .dropdown
-            button.btn.btn-secondary.dropdown-toggle type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" Actions
+            button.btn.bg-light.bg-gradient.dropdown-toggle type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" Actions
             ul.dropdown-menu aria-labelledby="dropdownMenuButton1"
               - if user.admin?
                 li.dropdown-item
@@ -41,6 +40,8 @@ table.table.table-striped
                     = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put
                 li.dropdown-item
                   = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }
-        td = link_to "Show", account_admin_user_path(user), class: "btn btn-sm btn-outline-success"
-        td = link_to "Edit", edit_account_admin_user_path(user), class: "btn btn-sm btn-outline-warning"
-        td = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger"
+              li.dropdown-divider
+              li.dropdown-item
+                = link_to "Show", account_admin_user_path(user)
+              li.dropdown-item
+                = link_to "Edit", edit_account_admin_user_path(user)
