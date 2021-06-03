@@ -44,6 +44,8 @@ Metrics/BlockLength:
     - 'config/environments/*'
     - 'spec/**/*.rb'
   IgnoredMethods: ['describe', 'context']
+SkipsModelValidations:
+  ForbiddenMethods: ['user_activity']
 Layout/LineLength:
   Max: 120
 Style/StringLiterals:

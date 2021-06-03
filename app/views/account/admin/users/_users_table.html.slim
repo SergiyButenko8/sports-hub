@@ -9,8 +9,14 @@ table.table.table-striped
     - obj.each do |user|
       tr
         td
-          = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 30px; height: 30px", class: "rounded-circle mx-1"
-          span = user.full_name
+          .info-user-table
+            .img-mask
+              = image_tag "https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg", style: "width: 38px; height: 38px", class: "rounded-circle"
+              - if user.online?
+                span.activity.online
+              - else
+                span.activity.offline
+            span = user.full_name
         -if user.active?
           td.text-success.text-capitalize = user.status
         -else
