@@ -2,16 +2,15 @@
 
 module Account::Admin
   class AdminBaseController < Account::AccountBaseController
+    include Pundit
     layout "admin_layout"
-    before_action :check_admin_access?
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_admin
 
     private
 
-    def check_admin_access?
-      unless current_user.admin?
-        flash[:alert] = "No permissions!"
-        redirect_to account_users_path
-      end
+    def user_not_admin
+      flash[:alert] = "You don't have permission to visit this page."
+      redirect_to account_users_path
     end
   end
 end
