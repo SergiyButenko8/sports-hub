@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum status: { active: 0, blocked: 1 }
   enum role: { user: 0, admin: 1 }
+  scope :online, -> { where("last_seen > ?", 10.minutes.ago) }
 
   def full_name
     if first_name.present? && last_name.present?
@@ -14,5 +15,9 @@ class User < ApplicationRecord
     else
       "---"
     end
+  end
+
+  def online?
+    last_seen > 10.minutes.ago
   end
 end

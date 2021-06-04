@@ -74,3 +74,33 @@
     z-index: 5;
   }
 }
+.info-user-table {
+  display: flex;
+  align-items: center;
+  .img-mask {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    align-self: flex-start;
+    margin-right: 5px;
+    .activity{
+      display: block;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      position: relative;
+      border: 2px solid #fff;
+      left: 26px;
+      bottom: 13px;
+    }
+    .online{
+      background-color: green;
+    }
+    .offline{
+      background-color: #666666;
+    }
+  }
+  .name-info{
+    align-self: flex-end;
+  }
+}
