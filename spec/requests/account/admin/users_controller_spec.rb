@@ -18,28 +18,35 @@ RSpec.describe 'admin users management', type: :request do
       expect(response).to be_successful
     end
 
-    it 'returns match users' do
-      s = User.ransack(first_name_or_last_name_cont: 'Sergiy')
-      expect(s.result.size).to eq(3)
-      expect(s.result.first.first_name).to eq("Sergiy")
-      expect(s.result.last.first_name).to eq("Sergiy")
+    it "assigns all users to @all_users" do
+      get account_admin_users_path
+      expect(assigns(:all_users)).to eq(User.all)
     end
 
-    it 'returns online users' do
-      current_admin.update(last_seen: Time.current)
-      s = User.ransack(online: true)
-      expect(s.result.size).to eq(1)
+    it "assigns all users match to query" do
+      get account_admin_users_path, params: { q: { first_name_or_last_name_cont: 'Sergiy' } }
+      expect(assigns(:all_users).size).to eq(3)
+      expect(assigns(:all_users).first.first_name).to eq("Sergiy")
     end
 
-    it 'returns offline users' do
-      current_admin.update(last_seen: Time.current)
-      s = User.ransack(offline: true)
-      expect(s.result.size).to eq(2)
+    it "assigns only active users to @all_users" do
+      get account_admin_users_path, params: { q: { status_eq: 0 } }
+      expect(assigns(:all_users)).to eq(User.active)
     end
 
-    it 'returns active users' do
-      s = User.ransack(status_eq: 0)
-      expect(s.result.size).to eq(2)
+    it "assigns only blocked users to @all_users" do
+      get account_admin_users_path, params: { q: { status_eq: 1 } }
+      expect(assigns(:all_users)).to eq(User.blocked)
+    end
+
+    it "assigns online users only" do
+      get account_admin_users_path, params: { q: { online: true } }
+      expect(assigns(:all_users).size).to eq(User.online.size)
+    end
+
+    it "assigns offline users only" do
+      get account_admin_users_path, params: { q: { offline: true } }
+      expect(assigns(:all_users).size).to eq(User.offline.size)
     end
 
     it 'returns blocked users' do

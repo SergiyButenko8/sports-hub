@@ -38,27 +38,47 @@ table.table
         -else
           td.text-dark.text-capitalize = user.status
         td
-          .dropdown
-            button.btn.bg-light.bg-gradient.dropdown-toggle type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" Actions
-            ul.dropdown-menu aria-labelledby="dropdownMenuButton1"
-              - if user.admin?
+          - if user.admin?
+            .btn-group.action-list
+              button.btn.btn-sm.admin-role type= "button"
+                = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user, user: {role: "user"}), method: :put
+              button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.admin-role.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #de4f4e"
+                span.visually-hidden Toggle Dropdown
+              ul.dropdown-menu
+                li.dropdown-item.admin-delete
+                  = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "admin-delete"
+                li.dropdown-divider
                 li.dropdown-item
-                  = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user, user: {role: "user"}), method: :put
+                  = link_to "Show", account_admin_user_path(user)
                 li.dropdown-item
-                  = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure?" }
-              - else
-                - if user.active?
-                  li.dropdown-item
-                    = link_to "Block", change_user_status_account_admin_user_path(user, user: {status: "blocked"}), method: :put
-                  li.dropdown-item
-                    = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put
-                - else
-                  li.dropdown-item
+                  = link_to "Edit", edit_account_admin_user_path(user)
+          - else
+            .btn-group.action-list
+              - if user.active?
+                  button.btn.btn-sm.user-active type= "button"
+                    = link_to "Block", change_user_status_account_admin_user_path(user, user: {status: "blocked"}), data: { confirm: "Are you sure?" }, method: :put
+                  button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.user-active.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #464646"
+                    span.visually-hidden Toggle Dropdown
+                  ul.dropdown-menu
+                    li.dropdown-item.user-delete
+                      = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure?" }, class: "user-delete"
+                    li.dropdown-item.user-role
+                      = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put, class: "user-role"
+                    li.dropdown-divider
+                    li.dropdown-item
+                      = link_to "Show", account_admin_user_path(user)
+                    li.dropdown-item
+                      = link_to "Edit", edit_account_admin_user_path(user)
+              -else
+                  button.btn.btn-sm.user-blocked type= "button"
                     = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put
-                li.dropdown-item
-                  = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }
-              li.dropdown-divider
-              li.dropdown-item
-                = link_to "Show", account_admin_user_path(user)
-              li.dropdown-item
-                = link_to "Edit", edit_account_admin_user_path(user)
+                  button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.user-blocked.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #64ab3d"
+                    span.visually-hidden Toggle Dropdown
+                  ul.dropdown-menu
+                    li.dropdown-item.user-delete
+                      = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "user-delete"
+                    li.dropdown-divider
+                    li.dropdown-item
+                      = link_to "Show", account_admin_user_path(user)
+                    li.dropdown-item
+                      = link_to "Edit", edit_account_admin_user_path(user)
