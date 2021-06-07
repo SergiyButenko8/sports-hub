@@ -37,6 +37,7 @@ RSpec.describe 'admin users management', type: :request do
     it "assigns only blocked users to @all_users" do
       get account_admin_users_path, params: { q: { status_eq: 1 } }
       expect(assigns(:all_users)).to eq(User.blocked)
+      expect(assigns(:all_users).first.id).to eq(blocked.id)
     end
 
     it "assigns online users only" do
@@ -47,12 +48,6 @@ RSpec.describe 'admin users management', type: :request do
     it "assigns offline users only" do
       get account_admin_users_path, params: { q: { offline: true } }
       expect(assigns(:all_users).size).to eq(User.offline.size)
-    end
-
-    it 'returns blocked users' do
-      s = User.ransack(status_eq: 1)
-      expect(blocked.status).to eq("blocked")
-      expect(s.result.size).to eq(1)
     end
 
     it 'return to account user page if not admin' do
