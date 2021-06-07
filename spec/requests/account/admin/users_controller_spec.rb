@@ -10,11 +10,42 @@ RSpec.describe 'admin users management', type: :request do
   end
 
   describe '#index' do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
+    let!(:blocked) { create(:blocked_user) }
 
     it 'returns http success' do
       get account_admin_users_path
       expect(response).to be_successful
+    end
+
+    it 'returns match users' do
+      s = User.ransack(first_name_or_last_name_cont: 'Sergiy')
+      expect(s.result.size).to eq(3)
+      expect(s.result.first.first_name).to eq("Sergiy")
+      expect(s.result.last.first_name).to eq("Sergiy")
+    end
+
+    it 'returns online users' do
+      current_admin.update(last_seen: Time.current)
+      s = User.ransack(online: true)
+      expect(s.result.size).to eq(1)
+    end
+
+    it 'returns offline users' do
+      current_admin.update(last_seen: Time.current)
+      s = User.ransack(offline: true)
+      expect(s.result.size).to eq(2)
+    end
+
+    it 'returns active users' do
+      s = User.ransack(status_eq: 0)
+      expect(s.result.size).to eq(2)
+    end
+
+    it 'returns blocked users' do
+      s = User.ransack(status_eq: 1)
+      expect(blocked.status).to eq("blocked")
+      expect(s.result.size).to eq(1)
     end
 
     it 'return to account user page if not admin' do
@@ -27,7 +58,7 @@ RSpec.describe 'admin users management', type: :request do
   describe '#show' do
     let(:user) { create(:user) }
 
-    it 'returns http success if admin' do\
+    it 'returns http success if admin' do
       get account_admin_user_path(current_admin)
       expect(response).to be_successful
     end
