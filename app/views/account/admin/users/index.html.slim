@@ -1,5 +1,26 @@
 .row
-  .col-6
-    = render 'account/admin/users/users_table', obj: @admins, title: "Admins"
-  .col-6
-    = render 'account/admin/users/users_table', obj: @users, title: "Users"
+  .col-12
+
+
+  .col-6.offset-1
+    .admin-tabs-table
+      nav.row.mb-1
+        .nav.nav-tabs.col-6 id="nav-tab" role="tab-list"
+          button.nav-link.active id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true"
+            span.underline.text-uppercase Users
+            span = " (#{@users.count})"
+          button.nav-link id="admins-tab" data-bs-toggle="tab" data-bs-target="#admins" type="button" role="tab" aria-controls="admins" aria-selected="false"
+            span.underline.text-uppercase Admins
+            span = " (#{@admins.count})"
+        .col-6.search
+          = search_form_for(@q, url: "/account/admin/users")do |f|
+            .input-group
+              .input-group-prepend
+                = f.button :button, type: :submit, class: "btn btn-outline-secondary"
+                  svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              = f.search_field :first_name_or_last_name_cont, class: "form-control"
+      .tab-content id="nav-tabContent"
+        .tab-pane.fade.show.active id="users" role="tabpanel" aria-labelledby="users-tab"
+          = render 'account/admin/users/users_table', obj: @users
+        .tab-pane.fade id="admins" role="tabpanel" aria-labelledby="admins-tab"
+          = render 'account/admin/users/users_table', obj: @admins

@@ -7,8 +7,10 @@ module Account::Admin
     before_action :not_current_user, only: %i[destroy change_admin_permission]
     before_action :authorize_admin_user
     def index
-      @users = User.where(role: 'user')
-      @admins = User.where(role: 'admin')
+      @q = User.ransack(params[:q])
+      @all_users = @q.result
+      @users = @all_users.user
+      @admins = @all_users.admin
     end
 
     def show; end
