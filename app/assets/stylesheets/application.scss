@@ -42,11 +42,126 @@
     }
   }
   .admin-tabs-table{
+    tr:hover{
+      -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+      cursor: pointer;
+    }
+    .sort{
+      position: absolute;
+      right: 5px;
+      top: 14px;
+      #actions{
+        position: absolute;
+        top: 25px;
+        right: 0px;
+        background-color: #fff;
+        z-index: 5;
+        li{
+          width: 100px;
+          padding: 0;
+          font-size: 12px;
+          span{
+            font-weight: 500;
+          }
+          span:hover{
+            background-color: #fff !important;
+            color: #000 !important;
+            cursor: default;
+          }
+          .action-item {
+            text-align: left;
+            color: #000;
+            display: block;
+            text-decoration: none;
+            padding: 4px 5px 4px 15px;
+            &:hover {
+              background-color: #f4d0d4;
+              color: #e05159;
+            }
+          }
+        }
+      }
+    }
+    .action-list{
+      .dropdown-menu{
+        padding: 0;
+        transform: translate3d(0px, 31px, 0px) !important;
+        border-radius: 0px;
+      }
+      .dropdown-item{
+        width: 198px;
+        height: 30px;
+        padding: 4px 0px;
+        text-align: center;
+        font-size: 14px;
+      }
+      width: 200px;
+      a{
+        text-decoration: none;
+        display: block;
+      }
+      .admin-role{
+        background-color: #fae9eb;
+        a{
+          color: #de4f4e;
+        }
+      }
+      .admin-delete{
+        background-color: #d4d9e2;
+        color: #3e4255;
+      }
+      .user-delete{
+        background-color: #fae9eb;
+        color: #e0535f;
+        a{
+          color: #e0535f;
+        }
+      }
+      .user-active{
+        background-color: #d4d9e2;
+        color: #464646;
+        a{
+          color: #464646;
+        }
+      }
+      .user-blocked{
+        background-color: #dfecdd;
+        a{
+          color: #64ab3d;
+        }
+      }
+      .user-blocked:hover{
+        .arrow-absolute{
+          color: #000;
+        }
+      }
+      .user-role{
+        background-color: #d4e7f1;
+        a{
+          color: #3f91c1;
+        }
+      }
+      .arrow-absolute{
+        position: absolute;
+        right: 0;
+        border: 1px solid #969696;
+        z-index: 1;
+      }
+
+    }
     .nav-tabs{
       border-bottom: none;
     }
     .search{
       justify-content: flex-end;
+      .search-init{
+        position: absolute;
+        right: 18px;
+        top: 10px;
+        cursor: pointer;
+      }
       .input-group{
         border: 1px solid lightgrey;
         border-radius: 6px;
@@ -57,12 +172,17 @@
     }
     .table{
       vertical-align: middle;
+      border-left: 1px solid lightgrey;
+      border-right: 1px solid lightgrey;
       thead{
         background-color: #f2f2f2;
         height: 30px;
-        text-transform: uppercase;
         font-size: 14px;
         color: #515b6c;
+        th{
+          padding-top: 16px;
+          padding-bottom: 16px;
+        }
         th:first-child{
           width: 50%;
           padding-left: 20px;

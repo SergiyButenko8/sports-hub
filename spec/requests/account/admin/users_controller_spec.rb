@@ -10,11 +10,44 @@ RSpec.describe 'admin users management', type: :request do
   end
 
   describe '#index' do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
+    let!(:blocked) { create(:blocked_user) }
 
     it 'returns http success' do
       get account_admin_users_path
       expect(response).to be_successful
+    end
+
+    it "assigns all users to @all_users" do
+      get account_admin_users_path
+      expect(assigns(:all_users)).to eq(User.all)
+    end
+
+    it "assigns all users match to query" do
+      get account_admin_users_path, params: { q: { first_name_or_last_name_cont: 'Sergiy' } }
+      expect(assigns(:all_users).size).to eq(3)
+      expect(assigns(:all_users).first.first_name).to eq("Sergiy")
+    end
+
+    it "assigns only active users to @all_users" do
+      get account_admin_users_path, params: { q: { status_eq: 0 } }
+      expect(assigns(:all_users)).to eq(User.active)
+    end
+
+    it "assigns only blocked users to @all_users" do
+      get account_admin_users_path, params: { q: { status_eq: 1 } }
+      expect(assigns(:all_users)).to eq(User.blocked)
+      expect(assigns(:all_users).first.id).to eq(blocked.id)
+    end
+
+    it "assigns online users only" do
+      get account_admin_users_path, params: { q: { online: true } }
+      expect(assigns(:all_users).size).to eq(User.online.size)
+    end
+
+    it "assigns offline users only" do
+      get account_admin_users_path, params: { q: { offline: true } }
+      expect(assigns(:all_users).size).to eq(User.offline.size)
     end
 
     it 'return to account user page if not admin' do
@@ -27,7 +60,7 @@ RSpec.describe 'admin users management', type: :request do
   describe '#show' do
     let(:user) { create(:user) }
 
-    it 'returns http success if admin' do\
+    it 'returns http success if admin' do
       get account_admin_user_path(current_admin)
       expect(response).to be_successful
     end

@@ -8,6 +8,11 @@ class User < ApplicationRecord
   enum status: { active: 0, blocked: 1 }
   enum role: { user: 0, admin: 1 }
   scope :online, -> { where("last_seen > ?", 10.minutes.ago) }
+  scope :offline, -> { where("last_seen <= ?", 10.minutes.ago) }
+
+  def self.ransackable_scopes(auth_object = nil)
+    super + %i[online offline]
+  end
 
   def full_name
     if first_name.present? && last_name.present?
@@ -17,7 +22,7 @@ class User < ApplicationRecord
     end
   end
 
-  def online?
+  def online
     last_seen > 10.minutes.ago
   end
 end
