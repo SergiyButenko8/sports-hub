@@ -29,6 +29,7 @@ module Account::Admin
 
     def change_admin_permission
       if @user.active? && user_params[:role] != @user.role && @user.update(user_params)
+        UserMailer.change_permission_email(@user).deliver_later
         flash[:notice] = "User #{@user.email} is an #{user_params[:role]} now"
       else
         flash[:alert] = "Role has not been changed due to wrong parameter."
@@ -38,6 +39,7 @@ module Account::Admin
 
     def change_user_status
       if @user.status != user_params[:status] && @user.update(user_params)
+        UserMailer.change_status_email(@user).deliver_later
         flash[:notice] = "User #{@user.email} is #{user_params[:status]} now"
       else
         flash[:alert] = "Status has not been changed due to wrong parameter."
@@ -47,6 +49,7 @@ module Account::Admin
 
     def destroy
       if @user.destroy
+        UserMailer.delete_account_email(@user).deliver_now
         flash[:notice] = "Account has been removed"
       else
         flash[:alert] = "Error.."

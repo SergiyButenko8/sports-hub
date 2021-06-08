@@ -1,0 +1,10 @@
+div style="width: 100%; max-width: 800px; margin: 0 auto;"
+  h2 style="max-width: 800px; text-align: center; margin: 10px auto; color: #000"
+    = title
+  h2 style="text-align: center; color: #000" = Time.current.strftime("%B %d, %Y")
+  div style="width: 100%; max-width: 500px; padding: 40px 30px; margin: 0 auto; background-color: #fff;"
+    = image_tag attachments['check_mark.png'].url, style: "height: 20px; width: 20px; margin: 20px auto; display: block"
+    h1 style="color: #da4b32; margin: 10px auto; text-align: center" Sports Hub
+    p style="font-size: 12px; text-align: center; margin: 25px 0px; color: #000"
+      = text
+    = link_to action, navigateTo, style: "margin: 15px auto; padding: 10px 0px; text-align: center; color: #fff; background-color: #da4b32; text-decoration: none; font-size: 11px; font-weight: bold; display: block"

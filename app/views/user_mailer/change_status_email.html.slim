@@ -1,0 +1,4 @@
+- if @user.active?
+  = render 'user_mailer/notification_user', title: "Hello! Your account has been activated", text: "Visit our site to view the latest news in the world of sport", action: "GO TO WEBSITE", navigateTo: root_url
+- else
+  = render 'user_mailer/notification_user', title: "Hello! Your account has been blocked", text: "Visit our site to view the latest news in the world of sport", action: "GO TO WEBSITE", navigateTo: root_url

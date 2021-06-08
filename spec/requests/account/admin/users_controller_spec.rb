@@ -197,5 +197,17 @@ RSpec.describe 'admin users management', type: :request do
         expect(response).to have_http_status(:redirect)
       end
     end
+
+    context "when failed attempt" do
+      before do
+        allow_any_instance_of(User).to receive(:destroy).and_return(false)
+      end
+
+      it "return false when tries to delete" do
+        expect do
+          delete account_admin_user_path(user2)
+        end.not_to change(User, :count)
+      end
+    end
   end
 end
