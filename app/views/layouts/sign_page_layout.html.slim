@@ -1,0 +1,30 @@
+html
+  head
+    title SportsHub
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_pack_tag 'application', 'data-turbolinks-track': true
+
+  body
+    .container-fluid.p-0
+      .sign-wrapper
+        .row.position-fixed.w-100
+          .col-12
+            .header.d-flex.justify-content-between.align-items-center
+              .logo Sports Hub
+              - if controller_name.titleize != 'Registrations'
+                .action-section
+                  span.hint-text.px-4 Don't have an account?
+                  = link_to "Get Started", new_user_registration_path, class: "btn btn-outline-danger sign-action"
+              - else
+                .action-section
+                  span.hint-text.px-4 Already have an account?
+                  = link_to "Log In", new_user_session_path, class: "btn btn-outline-danger sign-action"
+        .row.m-0
+          .col-5.p-0
+            .back-img
+          .col-7.p-0.d-flex.justify-content-center.align-items-center.min-vh-100
+            = yield

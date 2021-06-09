@@ -10,16 +10,15 @@ class User < ApplicationRecord
   scope :online, -> { where("last_seen > ?", 10.minutes.ago) }
   scope :offline, -> { where("last_seen <= ?", 10.minutes.ago) }
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   def self.ransackable_scopes(auth_object = nil)
     super + %i[online offline]
   end
 
   def full_name
-    if first_name.present? && last_name.present?
-      "#{first_name} #{last_name}".titleize
-    else
-      "---"
-    end
+    "#{first_name} #{last_name}".titleize
   end
 
   def online
