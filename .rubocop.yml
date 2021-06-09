@@ -54,3 +54,8 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/GuardClause:
   Enabled: false
+Metrics/AbcSize:
+  Max: 20
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/**/*'

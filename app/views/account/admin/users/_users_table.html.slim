@@ -41,7 +41,7 @@ table.table
           - if user.admin?
             .btn-group.action-list
               button.btn.btn-sm.admin-role type= "button"
-                = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user, user: {role: "user"}), method: :put
+                = link_to  "Remove from Admin", change_admin_permission_account_admin_user_path(user, user: {role: "user"}), method: :put, data: { confirm: "Are you sure?" }
               button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.admin-role.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #de4f4e"
                 span.visually-hidden Toggle Dropdown
               ul.dropdown-menu
@@ -63,7 +63,7 @@ table.table
                     li.dropdown-item.user-delete
                       = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure?" }, class: "user-delete"
                     li.dropdown-item.user-role
-                      = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put, class: "user-role"
+                      = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put, class: "user-role",  data: { confirm: "Are you sure?" }
                     li.dropdown-divider
                     li.dropdown-item
                       = link_to "Show", account_admin_user_path(user)
@@ -71,7 +71,7 @@ table.table
                       = link_to "Edit", edit_account_admin_user_path(user)
               -else
                   button.btn.btn-sm.user-blocked type= "button"
-                    = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put
+                    = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put, data: { confirm: "Are you sure?" }
                   button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.user-blocked.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #64ab3d"
                     span.visually-hidden Toggle Dropdown
                   ul.dropdown-menu
