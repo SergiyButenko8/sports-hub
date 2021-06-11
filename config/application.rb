@@ -41,6 +41,8 @@ module SportsHub
     config.to_prepare do
       Devise::SessionsController.layout 'sign_page_layout'
       Devise::RegistrationsController.layout 'sign_page_layout'
+      Devise::PasswordsController.layout 'sign_page_layout'
+      Devise::Mailer.layout 'mailer'
     end
   end
 end

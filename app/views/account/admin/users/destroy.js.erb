@@ -1,0 +1,5 @@
+$('.u-delete').bind('ajax:success', function(){
+    $(this).closest('tr').fadeOut();
+    let currentCount = $('.u-count.active .count').text();
+    $('.u-count.active .count').text(--currentCount);
+})

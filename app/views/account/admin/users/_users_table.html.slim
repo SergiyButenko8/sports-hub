@@ -3,7 +3,7 @@ table.table
     tr
       th NAME
       th STATUS
-      th.position-relative
+      th.position-relative style="padding-right: 20px"
         span ACTIONS
         - if obj == @users
           .sort
@@ -32,12 +32,13 @@ table.table
                 span.activity.online
               - else
                 span.activity.offline
-            span = user.full_name
+            #show_u_info
+              = link_to "#{user.full_name}", account_admin_user_path(user), remote: true, class: "user-f-name"
         -if user.active?
           td.text-capitalize style="color: #75cb73" = user.status
         -else
           td.text-dark.text-capitalize = user.status
-        td
+        td style="padding-right: 20px"
           - if user.admin?
             .btn-group.action-list
               button.btn.btn-sm.admin-role type= "button"
@@ -46,39 +47,24 @@ table.table
                 span.visually-hidden Toggle Dropdown
               ul.dropdown-menu
                 li.dropdown-item.admin-delete
-                  = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "admin-delete"
-                li.dropdown-divider
-                li.dropdown-item
-                  = link_to "Show", account_admin_user_path(user)
-                li.dropdown-item
-                  = link_to "Edit", edit_account_admin_user_path(user)
+                  = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure you want to delete this user?", remote: true }, class: "u-delete admin-delete"
           - else
             .btn-group.action-list
               - if user.active?
                   button.btn.btn-sm.user-active type= "button"
-                    = link_to "Block", change_user_status_account_admin_user_path(user, user: {status: "blocked"}), data: { confirm: "Are you sure?" }, method: :put
+                    = link_to "Block", change_user_status_account_admin_user_path(user, user: {status: "blocked"}), data: { confirm: "Are you sure you want to block this user?" }, method: :put
                   button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.user-active.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #464646"
                     span.visually-hidden Toggle Dropdown
                   ul.dropdown-menu
                     li.dropdown-item.user-delete
-                      = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure?" }, class: "user-delete"
+                      = link_to "Delete", account_admin_user_path(user), method: :delete,  data: {confirm: "Are you sure you want to delete this user?", remote: true }, class: "u-delete user-delete"
                     li.dropdown-item.user-role
                       = link_to "Make as admin", change_admin_permission_account_admin_user_path(user, user: {role: "admin"}), method: :put, class: "user-role",  data: { confirm: "Are you sure?" }
-                    li.dropdown-divider
-                    li.dropdown-item
-                      = link_to "Show", account_admin_user_path(user)
-                    li.dropdown-item
-                      = link_to "Edit", edit_account_admin_user_path(user)
               -else
                   button.btn.btn-sm.user-blocked type= "button"
-                    = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put, data: { confirm: "Are you sure?" }
+                    = link_to "Activate", change_user_status_account_admin_user_path(user, user: {status: "active"}), method: :put, data: { confirm: "Are you sure you want to activate this user?" }
                   button.btn.btn-sm.dropdown-toggle.dropdown-toggle-split.user-blocked.arrow-absolute type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #64ab3d"
                     span.visually-hidden Toggle Dropdown
                   ul.dropdown-menu
                     li.dropdown-item.user-delete
-                      = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "user-delete"
-                    li.dropdown-divider
-                    li.dropdown-item
-                      = link_to "Show", account_admin_user_path(user)
-                    li.dropdown-item
-                      = link_to "Edit", edit_account_admin_user_path(user)
+                      = link_to "Delete", account_admin_user_path(user), method: :delete, data: { confirm: "Are you sure you want to delete this user?", remote: true }, class: "u-delete user-delete"

@@ -57,57 +57,6 @@ RSpec.describe 'admin users management', type: :request do
     end
   end
 
-  describe '#show' do
-    let(:user) { create(:user) }
-
-    it 'returns http success if admin' do
-      get account_admin_user_path(current_admin)
-      expect(response).to be_successful
-    end
-
-    it 'redirect to login page' do
-      sign_in user
-      get account_admin_user_path(user)
-      expect(response).to have_http_status(:redirect)
-    end
-  end
-
-  describe '#edit' do
-    let(:user) { create(:user) }
-
-    it 'returns http success if admin' do\
-      get edit_account_admin_user_path(current_admin)
-      expect(response).to be_successful
-    end
-
-    it 'redirect to login page' do
-      sign_in user
-      get edit_account_admin_user_path(user)
-      expect(response).to have_http_status(:redirect)
-    end
-  end
-
-  describe '#update' do
-    context "when user params are valid" do
-      it "updates" do
-        current_first_name = current_admin.first_name
-        expect do
-          put account_admin_user_path(current_admin), params: { user: { first_name: "John" } }
-        end.to change { current_admin.reload.first_name }.from(current_first_name).to("John")
-        expect(response).to have_http_status(:redirect)
-      end
-    end
-
-    context "when user params are invalid" do
-      it "not updates" do
-        expect do
-          put account_admin_user_path(current_admin), params: { user: { email: "" } }
-        end.not_to change { current_admin.reload.first_name }
-        expect(response).to have_http_status(:success)
-      end
-    end
-  end
-
   describe '#change_admin_permission' do
     context "with active status" do
       let!(:admin) { create(:admin_user) }

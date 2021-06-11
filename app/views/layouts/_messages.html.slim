@@ -1,4 +1,8 @@
 - if notice
-  p.notice =notice
+  .alert.alert-success.alert-dismissible.fade.show.position-fixed role="alert"
+      span = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
 - if alert
-  p.alert =alert
+  .alert.alert-danger.alert-dismissible.fade.show.position-fixed role="alert"
+    span = alert
+    button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
