@@ -3,7 +3,12 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   minimum_coverage 90
-  add_filter ['app/channels', 'app/controllers/users', 'app/mailers', 'app/jobs']
+  add_filter ['app/channels', 'app/controllers/users/confirmations_controller.rb',
+              'app/controllers/users/omniauth_callbacks_controller.rb',
+              'app/controllers/users/omniauth_callbacks_controller.rb',
+              'app/controllers/users/passwords_controller.rb',
+              'app/controllers/users/sessions_controller.rb',
+              'app/controllers/users/unlocks_controller.rb', 'app/mailers', 'app/jobs']
 end
 require 'spec_helper'
 require 'database_cleaner/active_record'

@@ -1,18 +1,25 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.form-container
+  h2.mb-4 Log in to Sports Hub
+  .d-flex.align-content-start.mb-3
+    .facebook-icon.d-flex.justify-content-center.align-items-center
+      i.fab.fa-facebook-f
+    .google-icon.d-flex.justify-content-center.align-items-center.mx-2
+      i.fab.fa-google
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    p.text-danger.m-0 style="font-size: 11px; font-weight: 500"
+      = flash[:alert]
+    .row
+      .col
+        = f.label :email
+        = f.email_field :email, class:(flash[:alert] ? "form-control my-1 invalid-field" : "form-control my-1")
+    .row
+      .col.position-relative
+        = f.label :password
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          = link_to "Forgot password?", new_password_path(resource_name), class: "psw-recover"
+        = f.password_field :password, class:(flash[:alert] ? "form-control my-1 invalid-field" : "form-control my-1")
+    .row
+      .col-12
+        = f.submit "LOG IN", class: "btn btn-danger sign-btn w-100 mt-4"
+
+

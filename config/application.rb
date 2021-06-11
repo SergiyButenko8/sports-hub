@@ -37,5 +37,10 @@ module SportsHub
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.to_prepare do
+      Devise::SessionsController.layout 'sign_page_layout'
+      Devise::RegistrationsController.layout 'sign_page_layout'
+    end
   end
 end

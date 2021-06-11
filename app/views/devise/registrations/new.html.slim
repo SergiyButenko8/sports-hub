@@ -1,24 +1,28 @@
-h2
-  | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.form-container
+  h2.mb-4 Create Account
+  .d-flex.align-content-start.mb-3
+    .facebook-icon.d-flex.justify-content-center.align-items-center
+      i.fab.fa-facebook-f
+    .google-icon.d-flex.justify-content-center.align-items-center.mx-2
+      i.fab.fa-google
+  span.hint-text Or use your email for registration
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .row
+      .col
+        = f.label :first_name
+        = f.text_field :first_name, class:(resource.errors.any? ? "form-control my-1 invalid-field" : "form-control my-1")
+      .col
+        = f.label :last_name
+        = f.text_field :last_name, class:(resource.errors.any? ? "form-control my-1 invalid-field" : "form-control my-1")
+    .row
+      .col
+        = f.label :email
+        = f.email_field :email, class:(resource.errors.any? ? "form-control my-1 invalid-field" : "form-control my-1")
+    .row
+      .col
+        = f.label :password
+        = f.password_field :password, class:(resource.errors.any? ? "form-control my-1 invalid-field" : "form-control my-1")
+    .row
+      .col-12
+        = f.submit "SIGN UP", class: "btn btn-danger sign-btn w-100 mt-4"

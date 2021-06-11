@@ -14,6 +14,88 @@
  *= require_self
  *= require bootstrap
  */
+body{
+  min-width: 1300px;
+}
+.invalid-field{
+  border-color: red !important;
+}
+.sign-wrapper{
+  height: 100vh;
+  .header{
+    padding-right: 50px;
+    .logo{
+      height: 80px;
+      width: 260px;
+      background-color: red;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .action-section{
+      .hint-text{
+        font-size: 13px;
+        color: #2f2f2f;
+      }
+      .sign-action{
+        width: 120px;
+        border-radius: 0px;
+        font-size: 14px;
+      }
+    }
+  }
+  .back-img{
+    width: 100%;
+    height: 100vh;
+    background-image: url("login_bg.jpg");
+    background-repeat:  no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .form-container{
+    width: 400px;
+    label{
+      color: #5e5e5e;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin: 10px 0px 5px 0px;
+      font-weight: 500;
+    }
+    .sign-btn{
+      font-size: 12px;
+      font-weight: bold;
+      padding: 15px;
+    }
+    .facebook-icon,
+    .google-icon{
+      width: 35px;
+      height: 35px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover{
+        border-color: red;
+        svg{
+          color: red;
+        }
+      }
+    }
+    .hint-text{
+      font-size: 12px;
+      color: #424242;
+    }
+    .psw-recover{
+      position: absolute;
+      right: 14px;
+      top: 7px;
+      font-size: 13px;
+      text-decoration: none;
+    }
+  }
+}
 .admin-wrapper{
   padding-left: 92px !important;
   padding-top: 120px;
