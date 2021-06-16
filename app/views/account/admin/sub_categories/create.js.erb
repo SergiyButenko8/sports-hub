@@ -1,0 +1,4 @@
+$("#sub-categories-area").html("<%= j render 'account/admin/sub_categories/sub_categories', sub_categories: @sub_categories %>")
+$("#shared-modal").modal("hide")
+$(".alert").hide();
+$(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")

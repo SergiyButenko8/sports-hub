@@ -1,0 +1,5 @@
+$("#teams-area").html("<%= j render 'account/admin/teams/teams', teams: @teams %>")
+$("#shared-modal").modal("hide")
+$("#team<%= @team.id %>").addClass("ia-active")
+$(".alert").hide();
+$(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")

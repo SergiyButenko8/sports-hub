@@ -1,0 +1,5 @@
+= link_to "+ Add sub_category", new_account_admin_category_sub_category_path, remote: true, class:"btn add-btn-dotted mb-3"
+#sub-cat-list data-controller="drag" data-drag-url="/account/admin/categories/#{@category.id}/sub_categories/:id/move_position"
+  - @sub_categories.each do |sub_category|
+    div.sub-item data-id="#{sub_category.id}"
+      = render "account/admin/sub_categories/show", sub_category: sub_category

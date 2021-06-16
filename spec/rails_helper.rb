@@ -8,7 +8,9 @@ SimpleCov.start 'rails' do
               'app/controllers/users/omniauth_callbacks_controller.rb',
               'app/controllers/users/passwords_controller.rb',
               'app/controllers/users/sessions_controller.rb',
-              'app/controllers/users/unlocks_controller.rb', 'app/mailers', 'app/jobs']
+              'app/controllers/users/unlocks_controller.rb', 'app/mailers', 'app/jobs',
+              'app/handlers/team_move_to_handler.rb',
+              'app/handlers/sub_cat_move_to_handler.rb']
 end
 require 'spec_helper'
 require 'database_cleaner/active_record'
@@ -84,4 +86,11 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :request
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

@@ -1,0 +1,19 @@
+.ia-wrapper
+  .row
+    .col-3.offset-1
+      #categories-area
+        = render "account/admin/categories/categories"
+    .col-3
+      #sub-categories-area
+        - if params[:category_id].present?
+          = render "account/admin/sub_categories/sub_categories"
+
+    .col-3
+      #teams-area
+        -if params[:sub_category_id].present?
+          = render "account/admin/teams/teams"
+
+  div.modal.show id="shared-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    .modal-dialog
+      .modal-content
+        .modal-body id="c-modal"

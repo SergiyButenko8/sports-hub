@@ -21,3 +21,4 @@ document.addEventListener("turbolinks:load", function(event) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 });
+import "controllers"

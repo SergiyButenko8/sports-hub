@@ -57,6 +57,16 @@ RSpec.describe 'admin users management', type: :request do
     end
   end
 
+  describe '#show' do
+    let!(:user) { create(:user) }
+
+    it 'returns success and assigns user' do
+      get account_admin_user_path(user), xhr: true
+      expect(response).to render_template('account/admin/users/show')
+      expect(assigns(:user)).to eq(user)
+    end
+  end
+
   describe '#change_admin_permission' do
     context "with active status" do
       let!(:admin) { create(:admin_user) }
