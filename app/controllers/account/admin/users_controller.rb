@@ -2,10 +2,9 @@
 
 module Account::Admin
   class UsersController < AdminBaseController
-    before_action :set_user,
-                  only: %i[show edit update destroy change_user_status change_admin_permission]
+    before_action :set_user, except: %i[index]
     before_action :not_current_user, only: %i[destroy change_admin_permission]
-    before_action :authorize_admin_user
+    before_action :authorize_admin_user, only: %i[index show change_admin_permission change_user_status destroy]
     def index
       @q = User.ransack(params[:q])
       @all_users = @q.result
@@ -15,22 +14,10 @@ module Account::Admin
 
     def show; end
 
-    def edit; end
-
-    def update
-      if @user.update(user_params)
-        flash[:notice] = "User has been successfully updated"
-        redirect_to account_admin_users_path
-      else
-        flash.now[:alert] = "Error. User has not been changed."
-        render "edit"
-      end
-    end
-
     def change_admin_permission
       if @user.active? && user_params[:role] != @user.role && @user.update(user_params)
         UserMailer.change_permission_email(@user).deliver_later
-        flash[:notice] = "User #{@user.email} is an #{user_params[:role]} now"
+        flash[:notice] = "User #{@user.email} is #{user_params[:role]} now"
       else
         flash[:alert] = "Role has not been changed due to wrong parameter."
       end
@@ -50,11 +37,16 @@ module Account::Admin
     def destroy
       if @user.destroy
         UserMailer.delete_account_email(@user).deliver_now
-        flash[:notice] = "Account has been removed"
+        respond_to do |format|
+          format.js { flash.now[:notice] = "User #{@user.full_name} deleted" }
+          format.html { redirect_to account_admin_users_path, notice: "User #{@user.full_name} deleted" }
+        end
       else
-        flash[:alert] = "Error.."
+        respond_to do |format|
+          format.js { flash.now[:alert] = "Error" }
+          format.html { redirect_to account_admin_users_path, alert: "Error.." }
+        end
       end
-      redirect_to account_admin_users_path
     end
 
     private
