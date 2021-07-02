@@ -1,0 +1,5 @@
+- @categories.each do |category|
+  .top-category-item.d-flex.align-items-center.text-center.px-4
+    = link_to "#{category.label}", "#", class: ("top-category-btn")
+    - if category.hidden?
+      .badge.rounded-pill.hidden-badge hidden

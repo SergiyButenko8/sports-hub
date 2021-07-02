@@ -1,0 +1,18 @@
+.btn-group.sub-label.my-3 id="sub#{sub_category.id}"
+  button type="button" class="btn btn-label"
+    - if sub_category.hidden?
+      .badge.rounded-pill.hidden-badge hidden
+    = link_to "#{sub_category.label}", account_admin_category_sub_category_teams_path(@category, sub_category), remote: true, class: ("sub-btn")
+  button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"
+    i.fas.fa-ellipsis-h style="color: #d4d4d4"
+  ul.dropdown-menu.py-0
+    li
+      = link_to "Edit", edit_account_admin_category_sub_category_path(@category, sub_category), remote: true, class: "dropdown-item"
+      = link_to "Delete", account_admin_category_sub_category_path(@category, sub_category), method: :delete, data: { confirm: "Are you sure you want to delete this subcategory?", remote: true }, class: "dropdown-item delete-sub"
+      = link_to "#{sub_category.hidden? ? "Show" : "Hide"}", change_sub_visibility_account_admin_category_sub_category_path(@category, sub_category, sub_category: { hidden: !sub_category.hidden }), remote: true, method: :put, class: "dropdown-item hide-sub"
+    li
+      a.dropdown-item Move to >>
+      ul.dropdown-menu.dropdown-submenu.py-0
+        - @categories.each do |category|
+          li
+            = link_to "#{category.label}", move_to_category_account_admin_category_sub_category_path(@category, sub_category, params: { move_to_cat_id: category.id }), remote: true, method: :put, class: (category.id == @category.id ? "dropdown-item text-danger" : "dropdown-item move-sub")

@@ -1,0 +1,4 @@
+= link_to "+ Add category", new_account_admin_category_path, remote: true, class:"btn add-btn-dotted mb-3"
+#cat-list data-controller="drag" data-drag-url="/account/admin/categories/:id/move_position"
+  - @categories.each do |category|
+    = render "account/admin/categories/show", category: category

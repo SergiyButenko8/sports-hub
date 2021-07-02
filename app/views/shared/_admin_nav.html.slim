@@ -21,4 +21,6 @@
           span.visually-hidden
         ul.dropdown-menu
   .title-wrapper
-    h1.text-title.fw-bold Users
+    h1.text-title.fw-bold = @page_title
+  #top-category-wrapper class="d-flex"
+    = render "account/admin/categories/top_categories", categories: @categories

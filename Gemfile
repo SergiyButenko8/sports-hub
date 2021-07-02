@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'slim-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'acts_as_list', '~> 0.7.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'html2slim', '~> 0.2.0'
@@ -62,6 +63,7 @@ end
 group :test do
   gem 'database_cleaner-active_record'
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', '~> 0.21.2'
 end
 

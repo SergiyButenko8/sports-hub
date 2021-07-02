@@ -132,7 +132,7 @@ html, body{
 
 .admin-wrapper{
   padding-left: 92px !important;
-  padding-top: 192px;
+  padding-top: 270px;
   .u-info-wrapper{
     width: 320px;
     height: 500px;
@@ -375,7 +375,7 @@ html, body{
   position: fixed;
   left: 0px;
   top: 0px;
-  padding-top: 172px !important;
+  padding-top: 242px !important;
   .menu-item{
     width: 80px;
     height: 80px;
@@ -456,6 +456,32 @@ html, body{
     padding: 25px 30px 10px 90px;
     border-bottom: 1px solid lightgrey;
   }
+  #top-category-wrapper{
+    height: 60px;
+    padding: 0px 90px 0px 90px;
+    box-shadow: 0px 11px 20px 0px rgba(34, 60, 80, 0.2) !important;
+    max-width: 100%;
+    overflow-x: auto;
+    .top-category-item{
+      height: 100%;
+      position: relative;
+      .top-category-btn{
+        color: #b9b8b9;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .hidden-badge{
+        position: absolute;
+        top: 11px;
+        right: -16px;
+        font-size: 9px;
+        background-color: #ededed;
+        color: #b9b8b9;
+      }
+    }
+  }
 }
 
 .info-user-table {
@@ -516,5 +542,89 @@ html, body{
 
   .offline {
     background-color: #666666;
+  }
+}
+
+.ia-wrapper{
+  .add-btn-dotted{
+    width: 200px;
+    text-align: center;
+    padding: 12px 0;
+    color: #b2b2b2;
+    font-size: 14px;
+    border: 1px dashed #a3a3a3;
+  }
+  .ia-active,
+  .sortable-drag{
+    box-shadow: 0px 0px 11px 0px rgba(34, 60, 80, 0.2) !important;
+    border: none;
+    cursor: move;
+    .btn-label{
+      border: none !important;
+    }
+    .cat-btn,
+    .sub-btn,
+    .team-btn{
+      color: #e44e25 !important;
+    }
+  }
+  .btn-group{
+    display: block;
+    white-space:nowrap;
+    width: 200px;
+    .btn-label{
+      border-color: #d4d4d4 !important;
+      padding: 0;
+      .cat-btn,
+      .sub-btn,
+      .team-btn{
+        display: block;
+        padding: 7px 0px;
+        text-decoration: none;
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #b2b2b2;
+        font-weight: bold;
+      }
+      .hidden-badge{
+        position: absolute;
+        top: 11px;
+        left: 12px;
+        font-size: 9px;
+        background-color: #ededed;
+        color: #b9b8b9;
+      }
+    }
+    .dropdown-toggle{
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      z-index: 2;
+    }
+    .dropdown-toggle:after{
+      display: none;
+    }
+    .btn-label{
+      width: 200px;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+      display: block;
+    }
+    .dropdown-menu li {
+      position: relative;
+    }
+    .dropdown-menu .dropdown-submenu {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: -7px;
+    }
+  }
+  .btn-group:hover{
+    .dropdown-toggle {
+      display: block;
+    }
   }
 }

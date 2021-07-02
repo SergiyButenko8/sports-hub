@@ -1,0 +1,5 @@
+= link_to "+ Add team", new_account_admin_category_sub_category_team_path, remote: true, class:"btn add-btn-dotted mb-3"
+#teams-list data-controller="drag" data-drag-url="/account/admin/categories/#{@category.id}/sub_categories/#{@sub_category.id}/teams/:id/move_position"
+  - @teams.each do |team|
+    div data-id="#{team.id}"
+      = render "account/admin/teams/show", team: team

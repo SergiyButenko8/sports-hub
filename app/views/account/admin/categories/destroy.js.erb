@@ -1,0 +1,8 @@
+$('.delete-cat').bind('ajax:success', function(){
+    $(this).closest('.cat-label').fadeOut();
+    $("#sub-categories-area").html("");
+    $("#teams-area").html("")
+    $(".alert").hide();
+    $("#top-category-wrapper").html("<%= j render 'account/admin/categories/top_categories', categories: @categories %>")
+    $(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+})

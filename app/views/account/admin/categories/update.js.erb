@@ -1,0 +1,8 @@
+$("#categories-area").html("<%= j render 'account/admin/categories/categories', categories: @categories %>")
+$("#top-category-wrapper").html("<%= j render 'account/admin/categories/top_categories', categories: @categories %>")
+$("#shared-modal").modal("hide")
+$("#cat<%= @category.id %>").addClass("ia-active")
+$("#sub-categories-area").html("")
+$("#teams-area").html("")
+$(".alert").hide();
+$(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")

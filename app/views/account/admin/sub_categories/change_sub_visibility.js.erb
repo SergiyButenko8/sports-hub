@@ -1,0 +1,10 @@
+$("#sub-categories-area").html("<%= j render 'account/admin/sub_categories/sub_categories', sub_categories: @sub_categories %>")
+$(".alert").hide();
+$(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+
+
+//$('.hide-sub').bind("ajax:success", function(){
+//    $(this).closest('.sub-item').html("<%= j render 'account/admin/sub_categories/show', sub_category: @sub_category %>")
+//    $(".alert").hide();
+//    $(".admin-wrapper").prepend("<div class='alert alert-success alert-dismissible fade show position-fixed' role='alert'><span><%= notice %></span><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
+//})
