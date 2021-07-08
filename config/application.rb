@@ -44,5 +44,7 @@ module SportsHub
       Devise::PasswordsController.layout 'sign_page_layout'
       Devise::Mailer.layout 'mailer'
     end
+    config.i18n.available_locales = %i[en ua]
+    config.i18n.default_locale = :en
   end
 end

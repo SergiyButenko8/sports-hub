@@ -35,6 +35,7 @@ gem 'devise'
 gem 'html2slim', '~> 0.2.0'
 gem 'jquery-rails'
 gem "pundit"
+gem 'rails-i18n', '~> 6.0.0'
 gem 'ransack'
 gem 'rubocop', '~> 1.15', require: false
 gem 'rubocop-rails', require: false

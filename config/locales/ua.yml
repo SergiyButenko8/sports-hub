@@ -1,0 +1,12 @@
+ua:
+  account:
+    admin:
+      users:
+        users_table:
+          column_name: "ім'я"
+          column_status: "статус"
+          column_action: "дії"
+  admin_side_bar_menu:
+    users-item: "Користувачі"
+  admin_nav:
+    admin_role: "Адміністратор"
