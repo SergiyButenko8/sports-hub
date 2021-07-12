@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Authenticated user index page', type: :request do
+RSpec.describe Account::UsersController, type: :request do
   describe 'GET /account/users' do
     let(:user) { create(:user) }
 

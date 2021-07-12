@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    first_name { "Sergiy" }
-    last_name { "Butenko" }
-    password { "12345678" }
+    first_name { Faker::Name.first_name }
+    last_name  { Faker::Name.last_name }
+    password { Faker::Internet.password }
     email { Faker::Internet.safe_email }
     # sequence :email do |n|
     # "user#{n}@gmail.com"
@@ -30,6 +30,7 @@ FactoryBot.define do
     end
 
     factory :admin_user, traits: %i[admin active]
+    factory :regular_user, traits: %i[user active]
     factory :blocked_user, traits: %i[user blocked]
   end
 end

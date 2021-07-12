@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '#fullname' do
-    let(:admin) { create(:admin_user) }
+    let(:admin) { create(:admin_user, first_name: "Sergiy", last_name: "Butenko") }
 
     it 'returns the full_name for a created user' do
       expect(admin.full_name).to eq 'Sergiy Butenko'

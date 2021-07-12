@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'admin subcategories management', type: :request do
+RSpec.describe Account::Admin::SubCategoriesController, type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:sub_category) { create(:sub_category, label: "new subcategory") }
   let!(:valid_params) { attributes_for :sub_category }
