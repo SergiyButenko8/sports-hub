@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'admin users management', type: :request do
+RSpec.describe Account::Admin::UsersController, type: :request do
   let!(:current_admin) { create(:admin_user) }
 
   before do
@@ -10,8 +10,8 @@ RSpec.describe 'admin users management', type: :request do
   end
 
   describe '#index' do
-    let!(:user) { create(:user) }
-    let!(:blocked) { create(:blocked_user) }
+    let!(:user) { create(:user, first_name: "Sergiy") }
+    let!(:blocked) { create(:blocked_user, first_name: "Sergiy") }
 
     it 'returns http success' do
       get account_admin_users_path
@@ -25,7 +25,7 @@ RSpec.describe 'admin users management', type: :request do
 
     it "assigns all users match to query" do
       get account_admin_users_path, params: { q: { first_name_or_last_name_cont: 'Sergiy' } }
-      expect(assigns(:all_users).size).to eq(3)
+      expect(assigns(:all_users).size).to eq(2)
       expect(assigns(:all_users).first.first_name).to eq("Sergiy")
     end
 

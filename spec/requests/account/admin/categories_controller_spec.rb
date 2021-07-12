@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'admin categories management', type: :request do
+RSpec.describe Account::Admin::CategoriesController, type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:category) { create(:category, label: "new cat") }
   let!(:category_params) { attributes_for :category }

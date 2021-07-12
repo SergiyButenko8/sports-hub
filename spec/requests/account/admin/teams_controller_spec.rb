@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'admin subcategories management', type: :request do
+RSpec.describe Account::Admin::TeamsController, type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:team) { create(:team, label: "new team.") }
   let!(:valid_params) { attributes_for :team }
