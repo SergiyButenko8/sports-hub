@@ -13,7 +13,9 @@
  *= require_tree .
  *= require_self
  *= require bootstrap
+ @import "./actiontext.scss";
  */
+
 $app-primary: #f2f2f2;
 $app-red: #da4b31;
 html, body{
@@ -465,12 +467,15 @@ html, body{
     .top-category-item{
       height: 100%;
       position: relative;
-      .top-category-btn{
+      #top-category-btn{
         color: #b9b8b9;
         text-transform: uppercase;
         font-size: 15px;
         font-weight: bold;
         text-decoration: none;
+      }
+      .active-top{
+        color: $app-red !important;
       }
       .hidden-badge{
         position: absolute;
@@ -625,6 +630,99 @@ html, body{
   .btn-group:hover{
     .dropdown-toggle {
       display: block;
+    }
+  }
+}
+.image-art-show{
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 40px;
+}
+.articles-list{
+  max-width: 1200px;
+  margin: 0 auto;
+  .article-item{
+    border: none;
+    .art-image {
+      width: 400px;
+      height: 250px;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+    }
+    .art-headline{
+      text-decoration: none;
+      color: black;
+    }
+    .grey-larger-text{
+      color: #938f90;
+      font-size: 18px;
+    }
+    .publish-state{
+      width: 85px;
+      .green-circle{
+        width: 9px;
+        height: 9px;
+        background-color: forestgreen;
+        border-radius: 50%;
+      }
+    }
+    &:hover{
+      background-color: #fff !important;
+      box-shadow: 0px 0px 11px 0px rgba(34, 60, 80, 0.2) !important;
+      .dropdown-toggle{
+        display: block;
+      }
+    }
+    .dropdown-toggle{
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .dropdown-toggle:after{
+      display: none;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+      display: block;
+    }
+    .dropdown-menu li {
+      position: relative;
+    }
+    .dropdown-menu{
+      //transform: translate3d(164px, 40px, 0px);
+      min-width: 100px;
+      padding: 0;
+      .dropdown-item {
+        width: 108px;
+        height: 30px;
+        padding: 4px 0px;
+        text-align: center;
+        font-size: 14px;
+        margin: 0;
+        a {
+          text-decoration: none;
+          color: #000;
+          display: block;
+          width: 100%;
+        }
+        &:hover{
+          a {
+            color: red;
+          }
+        }
+      }
+    }
+    .dropdown-menu .dropdown-submenu {
+      position: absolute;
+      left: 100%;
+      top: -130px;
+      .dropdown-item:hover{
+        a{
+          color: red;
+        }
+      }
     }
   }
 }

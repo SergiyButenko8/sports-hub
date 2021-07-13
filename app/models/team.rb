@@ -3,4 +3,5 @@ class Team < ApplicationRecord
   validates :label, presence: true, uniqueness: true, length: { minimum: 3 }
 
   belongs_to :sub_category
+  has_many :articles, dependent: :destroy
 end

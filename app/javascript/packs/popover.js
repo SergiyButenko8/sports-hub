@@ -20,6 +20,12 @@ document.addEventListener("turbolinks:load", function () {
         $(".team-label").removeClass("ia-active")
         $(this).closest(".team-label").addClass("ia-active")
     })
+    $("#article_sub_category_id").on('change', function () {
+        subcat = $(this).children(":selected").attr("value");
+        category = $(".current-category").attr("id")
+        $.ajax({
+            url: "/account/admin/categories/" + category + "/articles/" + subcat + "/populate_team_list",
+            type: "GET"
+        })
+    });
 });
-
-

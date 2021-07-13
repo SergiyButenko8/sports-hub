@@ -1,0 +1,40 @@
+= form_for [:account,:admin,@category,@article] do |f|
+  .d-none.current-category id="#{@category.id}"
+  .row
+    .col
+      - unless @article.new_record?
+        = image_tag(@article.image.thumb.url, alt: "#{@article.alt}") if @article.image?
+
+  .row.my-4
+    .col
+      = f.label :image, "IMAGE", class:"mx-2"
+      = f.file_field :image
+  .row
+    .col
+      = f.label :sub_category_id, "CONFERENCE"
+      = f.select :sub_category_id, @sub_categories.map{ |s| [s.label, s.id] }, { include_blank: true }, {class: "form-select"}
+    .col
+      #teams-select
+        = f.label :team, "TEAM"
+        = f.select :team_id, @teams.map{ |t| [t.label, t.id] }, { include_blank: true }, {class: "form-select"}
+  .row.my-4
+    .col
+      = f.label :alt, "ALT"
+      = f.text_field :alt, class:("form-control mb-2")
+  .row.my-4
+    .col
+      = f.label :headline, "ARTICLE HEADLINE*"
+      = f.text_field :headline, class: ("form-control mb-2")
+  .row.my-4
+    .col
+      = f.label :caption, "CAPTION*"
+      = f.text_field :caption, class: ("form-control mb-2")
+  .row.my-4
+    .col
+      = f.label :content, "CONTENT*"
+      = f.rich_text_area :content, class:"form-control mb-2"
+  .row.my-4
+    .col
+      = f.label :commented, "Comments", class:("mx-2")
+      = f.check_box :commented, checked: true
+  = f.submit class: "btn btn-danger"

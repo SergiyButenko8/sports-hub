@@ -13,6 +13,13 @@ Rails.application.routes.draw do
         end
       end
       resources :categories do
+        resources :articles do
+          member do
+            get 'populate_team_list', to: 'articles#populate_team_list'
+            put 'change_publish_status', to: 'articles#change_publish_status'
+            put 'move_article_to_category', to: 'articles#move_article_to_category'
+          end
+        end
         member do
           patch 'move_position', to: 'categories#move_position'
           put 'change_cat_visibility', to: "categories#change_cat_visibility"
