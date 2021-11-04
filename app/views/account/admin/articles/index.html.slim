@@ -1,0 +1,35 @@
+.articles-list
+  = link_to "+ New Article", new_account_admin_category_article_path(@category), class:("btn btn-danger")
+  - @articles.each do |article|
+
+    .card.p-4.d-flex.justify-content-between.flex-row.article-item.my-3
+      button.btn.dropdown-toggle type="button" data-bs-toggle="dropdown" aria-expanded="false"
+        i.fas.fa-ellipsis-h style="color: #d4d4d4"
+      ul.dropdown-menu
+        - if article.published?
+          li.dropdown-item = link_to "Unpublish", change_publish_status_account_admin_category_article_path(@category, article, article: { published: false}), method: :put
+        - else
+          li.dropdown-item = link_to "Publish", change_publish_status_account_admin_category_article_path(@category, article, article: { published: true}), method: :put
+        li.dropdown-item  = link_to "Edit", edit_account_admin_category_article_path(@category, article)
+        li.dropdown-item  = link_to "Delete", account_admin_category_article_path(@category, article), method: :delete, data: { confirm: "Are you sure you want to delete this article?" }
+        li
+          a.dropdown-item Move to >>
+          ul.dropdown-menu.dropdown-submenu.py-0
+            - @categories.each do |category|
+              - if @category.id != category.id
+                li.dropdown-item = link_to "#{category.label}", move_article_to_category_account_admin_category_article_path(@category, article, params: { dest_category_id: category.id }), method: :put
+
+      = link_to account_admin_category_article_path(@category, article), style:"text-decoration: none"
+        .art-image style='background: url("#{article.image.url}"'
+      .body-section.px-3.d-flex.justify-content-between.flex-column  style="width: calc(100% - 400px)"
+        = link_to account_admin_category_article_path(@category, article), style:"text-decoration: none"
+          h4.art-headline = article.headline
+        p.grey-larger-text.my-4 = strip_tags(article.content.to_s).truncate(200)
+        .d-flex.justify-content-between.mt-4
+          .association-tree
+            h4.grey-larger-text = article.associates
+
+          .publish-state.d-flex.justify-content-between.align-items-center
+            - if article.published?
+              .green-circle
+              p.text-secondary.m-0 Published

@@ -1,0 +1,5 @@
+label TEAM
+select.form-select name="article[team_id]"
+  option value=""
+  - @teams.each do |team|
+    option value="#{team.id}" = team.label

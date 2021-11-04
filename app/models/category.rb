@@ -3,4 +3,5 @@ class Category < ApplicationRecord
   validates :label, presence: true, uniqueness: true, length: { minimum: 3 }
 
   has_many :sub_categories, dependent: :destroy
+  has_many :articles, dependent: :destroy
 end

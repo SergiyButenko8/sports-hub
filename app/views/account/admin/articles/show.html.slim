@@ -1,0 +1,4 @@
+.row
+  .col-8.offset-2
+    = image_tag(@article.image.url, alt: "#{@article.alt}",  class:"image-art-show") if @article.image?
+    == (@article.content.to_s).html_safe

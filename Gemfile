@@ -31,9 +31,12 @@ gem 'slim-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'acts_as_list', '~> 0.7.2'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'carrierwave', '~> 2.0'
 gem 'devise'
+gem 'file_validators'
 gem 'html2slim', '~> 0.2.0'
 gem 'jquery-rails'
+gem 'mini_magick'
 gem "pundit"
 gem 'ransack'
 gem 'rubocop', '~> 1.15', require: false
